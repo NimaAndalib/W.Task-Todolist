@@ -237,7 +237,7 @@ body {
 }
 
 .task-body {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
 }
 
 .task-icon i {
@@ -299,6 +299,8 @@ body {
 .sidebar-card {
     background-color: rgba(36, 31, 55, 0.38);
 }
+
+/* شروع صفحه تسک */
 
 /* رسپانسیو */
 @media (max-width: 991px) {
