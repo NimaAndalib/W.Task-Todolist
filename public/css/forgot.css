@@ -1,0 +1,168 @@
+/* فونت شبنم */
+@font-face {
+    font-family: "shabnam";
+    src: url('../font/shabnam/Shabnam.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ریست استایل‌ها */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "shabnam", sans-serif;
+    background-image: url('../img/login2.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #fff;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* لایه شفاف روی پس‌زمینه */
+.transparent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* استایل باکس اصلی */
+.box {
+    background-color: rgba(81, 103, 101, 0.45);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+}
+
+/* استایل عنوان */
+.box span.fs-5 {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* استایل خط جداکننده */
+hr {
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    margin: 15px 0;
+}
+
+/* استایل فیلدهای ورودی */
+.input-custom {
+    background-color: rgba(140, 155, 165, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.input-custom:focus {
+    box-shadow: 0 0 0 3px rgba(0, 92, 100, 0.45);
+    background-color: rgba(140, 155, 165, 0.45);
+    border-color: rgba(255, 255, 255, 0.3);
+    outline: none;
+    color: white;
+}
+
+/* استایل دکمه‌ها */
+.submit {
+    background-color: rgba(12, 106, 168, 0.3);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.submit:hover {
+    background-color: rgba(0, 153, 255, 0.09);
+}
+
+.submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* استایل تایمر */
+.timer-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.timer {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* استایل دکمه ارسال مجدد */
+#resendBtn {
+    background: transparent;
+    border: none;
+    color: #0dcaf0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+}
+
+#resendBtn:disabled {
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* استایل پیام‌های خطا */
+.error-message {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+/* استایل لوگو */
+h1 img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* رسپانسیو برای موبایل */
+@media (max-width: 576px) {
+    .box {
+        padding: 20px;
+    }
+
+    body {
+        padding: 15px;
+    }
+}

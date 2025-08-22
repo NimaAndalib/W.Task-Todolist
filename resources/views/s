@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <style>
+        body {
+            background: #121212;
+            color: #f8f9fa;
+            direction: rtl;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .time-picker {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.6);
+            text-align: center;
+        }
+
+        label {
+            color: #f8f9fa;
+        }
+
+        .form-inline {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        select {
+            height: auto;
+            overflow-y: auto;
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+
+    <div class="time-picker">
+        <h3 class="mb-3">انتخاب ساعت</h3>
+        <form class="form-inline">
+            <div>
+                <label for="hour" class="form-label">ساعت</label>
+                <select id="hour" class="form-select bg-dark text-light border-info" size="1" onfocus="this.size=3"
+                    onblur="this.size=1" onchange="this.size=1; this.blur();">
+                    <script>
+                        for (let i = 0; i < 24; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div>
+                <label for="minute" class="form-label">دقیقه</label>
+                <select id="minute" class="form-select bg-dark text-light border-info" size="1" onfocus="this.size=3"
+                    onblur="this.size=1" onchange="this.size=1; this.blur();">
+                    <script>
+                        for (let i = 0; i < 60; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div>
+                <button type="button" class="btn btn-info mt-4" onclick="selectTime()">تایید</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function selectTime() {
+            let hour = document.getElementById("hour").value;
+            let minute = document.getElementById("minute").value;
+            let note = document.getElementById("note").value;
+            alert(`زمان انتخاب شده: ${hour}:${minute}\nتوضیحات: ${note}`);
+        }
+    </script>
+
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+
+    </body>
+
+</html>
