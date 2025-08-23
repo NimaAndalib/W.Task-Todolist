@@ -195,11 +195,11 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">ساعت شروع</label>
-                                <input type="text" id="startTime" class="form-control" placeholder="1:00" required>
+                                <input type="text" id="startTime" class="form-control" placeholder="14:00" required>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">ساعت پایان</label>
-                                <input type="text" id="endTime" class="form-control" placeholder="1:30" required>
+                                <input type="text" id="endTime" class="form-control" placeholder="14:30" required>
                             </div>
                         </div>
                         <!-- توضیحات -->
@@ -486,6 +486,29 @@
                         const select = document.querySelector('.custom-select');
                         if (select && select.filterTasks) select.filterTasks();
                     };
+
+                    // ======== Auto-formatting تاریخ و ساعت ========
+                    const persianDateInput = document.getElementById('persianDate');
+                    const startTimeInput = document.getElementById('startTime');
+                    const endTimeInput = document.getElementById('endTime');
+
+                    const formatDateInput = (e) => {
+                        let val = e.target.value.replace(/\D/g, '');
+                        if (val.length >= 5) val = val.slice(0, 4) + '/' + val.slice(4, 6) + '/' + val.slice(6, 8);
+                        else if (val.length >= 3) val = val.slice(0, 4) + '/' + val.slice(4, 6);
+                        e.target.value = val;
+                    };
+
+                    const formatTimeInput = (e) => {
+                        let val = e.target.value.replace(/\D/g, '');
+                        if (val.length > 2) val = val.slice(0, 2) + ':' + val.slice(2, 4);
+                        e.target.value = val;
+                    };
+
+                    if (persianDateInput) persianDateInput.addEventListener('input', formatDateInput);
+                    if (startTimeInput) startTimeInput.addEventListener('input', formatTimeInput);
+                    if (endTimeInput) endTimeInput.addEventListener('input', formatTimeInput);
+
 
                     if (taskForm) {
                         taskForm.addEventListener('submit', e => {

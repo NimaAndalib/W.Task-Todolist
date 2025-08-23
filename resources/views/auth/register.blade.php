@@ -12,8 +12,8 @@
 
 <body class="text-white text-center">
     <div class="transparent"></div>
-    <div class="container py-4 pt-1">
-        <div class="text-center mb-4">
+    <div class="container pt-1">
+        <div class="text-center">
             <img src="{{ asset('img/logo.png') }}" alt="لوگو" width="150">
         </div>
 
