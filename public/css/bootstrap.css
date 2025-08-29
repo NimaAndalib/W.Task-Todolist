@@ -35,9 +35,7 @@
     --bs-success: #198754;
     --bs-info: #0dcaf0;
     --bs-warning: #ffc107;
-    --bs-d
-    /*  */
-    anger: #dc3545;
+    --bs-danger: #dc3545;
     --bs-light: #f8f9fa;
     --bs-dark: #212529;
     --bs-primary-rgb: 13, 110, 253;
@@ -206,7 +204,7 @@ body {
     text-align: var(--bs-body-text-align);
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent
+    -webkit-tap-highlight-color: transparent;
 }
 
 hr {
@@ -214,7 +212,7 @@ hr {
     color: inherit;
     border: 0;
     border-top: var(--bs-border-width) solid;
-    opacity: .25
+    opacity: .25;
 }
 
 .h1,
@@ -809,7 +807,7 @@ progress {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
 
     .container,
     .container-md,
@@ -854,7 +852,7 @@ progress {
 :root {
     --bs-breakpoint-xs: 0;
     --bs-breakpoint-sm: 576px;
-    --bs-breakpoint-md: 768px;
+    --bs-breakpoint-md: 786px;
     --bs-breakpoint-lg: 992px;
     --bs-breakpoint-xl: 1200px;
     --bs-breakpoint-xxl: 1400px
@@ -1301,7 +1299,7 @@ progress {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .col-md {
         flex: 1 0 0%
     }
@@ -3992,7 +3990,7 @@ fieldset:disabled .btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .dropdown-menu-md-start {
         --bs-position: start
     }
@@ -4702,7 +4700,7 @@ fieldset:disabled .btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .navbar-expand-md {
         flex-wrap: nowrap;
         justify-content: flex-start
@@ -5842,7 +5840,7 @@ fieldset:disabled .btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .list-group-horizontal-md {
         flex-direction: row
     }
@@ -7314,7 +7312,7 @@ fieldset:disabled .btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .offcanvas-md {
         --bs-offcanvas-height: auto;
         --bs-offcanvas-border-width: 0;
@@ -8044,7 +8042,7 @@ fieldset:disabled .btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .sticky-md-top {
         position: -webkit-sticky;
         position: sticky;
@@ -10891,7 +10889,7 @@ fieldset:disabled .btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:786px) {
     .float-md-start {
         float: right !important
     }

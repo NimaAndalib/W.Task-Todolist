@@ -21,7 +21,7 @@
             <h2 class="text-center mb-3">ثبت نام</h2>
             <hr class="my-3">
 
-            <form id="registerForm" class="text-start" method="post">
+            <form action="{{ route('register') }}" id="registerForm" class="text-start" method="post">
                 @csrf
 
                 <!-- فیلد نام کامل -->

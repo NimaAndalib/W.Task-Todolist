@@ -1,35 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
-Route::get('/', function () {
-    return view('auth/login');
-})->name('login');
+// 🔐 روت‌های احراز هویت
+require __DIR__.'/auth/authentication.php';
+// require __DIR__.'/auth/password.php';
 
-Route::get('/register', function () {
-    return view('auth/register');
-})->name('register');
+// 🚀 روت‌های برنامه
+require __DIR__.'/web/app.php';
+require __DIR__.'/web/profile.php';
+require __DIR__.'/web/tasks.php';
 
-Route::get('/forgot', function () {
-    return view('auth/password/forgot');
-})->name('forgot');
+// ❌ خطای 404
+Route::fallback(function () {
+    abort(404, 'صفحه مورد نظر یافت نشد');
+});
 
-Route::get('/reset', function () {
-    return view('auth/password/reset');
-})->name('reset');
+// نمایش و ذخیره یادداشت
+Route::get('/note', [NoteController::class, 'show'])->name('note.show');
+Route::post('/note', [NoteController::class, 'store'])->name('note.store');
+Route::put('/note/{id}', [NoteController::class, 'update'])->name('note.update');
+Route::delete('/note/{id}', [NoteController::class, 'destroy'])->name('note.destroy');
 
-Route::get('/app', function () {
-    return view('layouts/app');
-})->name('app');
-
-Route::get('/dashboard', function () {
-    return view('pages/dashboard');
-})->name('dashboard');
-
-Route::get('/task', function () {
-    return view('pages/task');
-})->name('task');
-
-Route::get('/activiti', function () {
-    return view('pages/activiti');
-})->name('activiti');
+// پیشرفت تسک‌ها
+Route::middleware('auth')->get('/tasks/progress', [TaskController::class, 'progress']);

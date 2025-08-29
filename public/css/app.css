@@ -12,12 +12,10 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    /* min-height: 100vh; */
     color: #fff;
     overflow-x: hidden;
 }
 
-/* لایه شفاف */
 .transparent {
     position: fixed;
     top: 0;
@@ -28,17 +26,11 @@ body {
     z-index: -1;
 }
 
-/* ساختار اصلی */
-
-.navbar-main {
-    width: 100%;
-    text-align: center;
-}
-
 .box {
     margin-top: 2.5vh;
     border-radius: 1rem !important;
     overflow: hidden;
+    position: relative;
 }
 
 .main-box {
@@ -46,309 +38,12 @@ body {
     backdrop-filter: blur(10px);
     height: 95vh;
     overflow: auto;
-    /* فعال کردن اسکرول داخل باکس */
+    overflow-x: hidden;
     overscroll-behavior: contain;
-    /* جلوگیری از بونس شدن اسکرول */
     -webkit-overflow-scrolling: touch;
-
-    /* برای iOS*/
 }
 
 .head-box {
     background-color: rgba(39, 49, 48, 0.68);
-}
-
-/* نوار کناری */
-.navbar {
-    height: 100%;
-    padding: 1rem 0;
-}
-
-.nav-item {
-    margin: 0.25rem 0;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.nav-item.active {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%);
-}
-
-.nav-item i {
-    font-size: 1.25rem;
-    width: 2rem;
-    text-align: center;
-}
-
-
-/* دکمه خروج */
-.log-out-btn {
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
-    backdrop-filter: blur(5px);
-
-}
-
-/* افکت هورور */
-.log-out-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.log-out-btn:hover .ri-expand-left-fill {
-    transform: translateX(-5px);
-}
-
-/* انیمیشن آیکون */
-.ri-expand-left-fill {
-    transition: transform 0.3s ease;
-}
-
-/* افکت آبشاری هنگام هورور */
-.hover-effect {
-    position: absolute;
-    top: 0;
-    /* left: -100%; */
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: 0.5s;
-}
-
-.log-out-btn:hover .hover-effect {
-    left: 100%;
-}
-
-/* dashboard */
-
-/* تایپوگرافی */
-.gradient-title {
-    background: linear-gradient(to left, #4a4ab1, #a020f0, #808080, #ffffff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.description-text,
-.task-date {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 13px;
-    margin-top: -5px;
-}
-
-/* کامپوننت‌های عمومی */
-.profile-img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-/* کامپوننت انتخاب سفارشی */
-.custom-select {
-    position: relative;
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 2rem;
-    padding: 2rem 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    color: white;
-}
-
-.selected-option {
-    font-size: 15px;
-}
-
-.options-list {
-    display: none;
-    position: absolute;
-    background-color: #343a40;
-    border-radius: 0.5rem;
-    z-index: 1000;
-    list-style: none;
-    padding: 0;
-    margin-top: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    width: 145px;
-}
-
-.option-item {
-    padding: 0.5rem 1rem;
-    transition: background 0.2s;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.option-item:hover {
-    background: linear-gradient(to right, #4a4ab1, #a020f0);
-    color: white;
-}
-
-.option-item:last-child {
-    border-bottom: none;
-}
-
-/* دکمه ایجاد تسک */
-.btn-create-task {
-    background: transparent;
-    border: 2px solid #a020f0;
-    color: #fff;
-    border-radius: 2rem;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s;
-    box-shadow: 0 0 4px rgba(160, 32, 240, 0.6),
-        0 0 8px rgba(160, 32, 240, 0.5),
-        0 0 12px rgba(160, 32, 240, 0.4);
-}
-
-.btn-create-task:hover {
-    background: rgba(160, 32, 240, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 0 8px rgba(160, 32, 240, 0.8),
-        0 0 16px rgba(160, 32, 240, 0.6),
-        0 0 24px rgba(160, 32, 240, 0.4);
-}
-
-/* کارت تسک */
-.task-card {
-    background-color: rgba(36, 31, 55, 0.38);
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-}
-
-.task-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.task-body {
-    padding: 1.5rem 1rem;
-}
-
-.task-icon i {
-    cursor: pointer;
-}
-
-
-/* مودال */
-.modal-dark .modal-content {
-    background-color: #1e1e2d;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modal-dark .form-control {
-    background-color: #2a2a3a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-.modal-dark .form-control::placeholder {
-    color: #a9a9a9a7;
-    font-size: 14px;
-}
-
-.modal-dark .form-control:focus {
-    background-color: #2a2a3a;
-    color: white;
-    border-color: #a020f0;
-    box-shadow: 0 0 0 0.2rem rgba(160, 32, 240, 0.25);
-}
-
-.modal-backdrop{
-    display: none;
-}
-
-/* ناوبری */
-.breadcrumb-nav {
-    direction: ltr;
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumb-nav a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.breadcrumb-nav a:hover {
-    color: white;
-}
-
-.breadcrumb-separator {
-    margin: 0 0.5rem;
-    color: rgba(255, 255, 255, 0.3);
-}
-
-.sidebar-card {
-    background-color: rgba(36, 31, 55, 0.38);
-}
-
-/* شروع صفحه تسک */
-
-/* رسپانسیو */
-@media (max-width: 991px) {
-    .navbar-collapse {
-        width: 100%;
-    }
-
-    .navbar-nav {
-        width: 100%;
-    }
-
-    .nav-link {
-        justify-content: center;
-    }
-}
-
-/* رسپانسیو برای موبایل (786px به پایین) */
-@media (max-width: 786px) {
-    .nav-text {
-        display: none;
-    }
-
-    .navbar-brand {
-        display: none;
-    }
-
-    .navbar-nav {
-        margin-top: 5px;
-    }
-
-    .gradient-title {
-        font-size: 1.8rem;
-    }
-
-    .dashboard-header {
-        flex-direction: column;
-    }
-}
-
-/* رسپانسیو برای موبایل‌های کوچک (576px به پایین) */
-@media (max-width: 576px) {
-
-    .nav-item i,
-    .log-out i {
-        padding: 4px 8px;
-    }
-
-    .navbar {
-        padding: 0.5rem 0;
-    }
+    height: 95vh;
 }

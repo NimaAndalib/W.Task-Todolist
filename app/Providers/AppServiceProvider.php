@@ -6,17 +6,13 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
+    // 📝 ثبت سرویس‌ها و وابستگی‌های عمومی برنامه
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
+    // 🚀 راه‌اندازی سرویس‌های عمومی برنامه
     public function boot(): void
     {
         //
