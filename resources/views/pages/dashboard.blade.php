@@ -7,7 +7,7 @@
 @section('content')
     <div class="dashboard-container">
         <!-- هدر -->
-        <div class="dashboard-header row align-items-center py-3">
+        <div class="dashboard-header row align-items-center pb-3">
             <div class="col-md-6 col-12 d-flex align-items-center">
                 <!-- profile -->
                 <div class="profile-wrap position-relative w-100">
@@ -106,7 +106,7 @@
                             <div class="custom-select-wrapper">
                                 <div class="custom-select py-2 btn">
                                     <div class="selected-option text-white text-center" data-value="current">
-                                        <span>تسک جاری</span>
+                                        <span>همه تسک‌ها </span>
                                         <i class="ri-arrow-down-s-line ms-2"></i>
                                     </div>
                                     <ul class="options-list d-none">
@@ -137,15 +137,18 @@
                 @foreach ($initialTasks as $task)
                     <div class="task-card" data-id="{{ $task->id }}" data-priority="{{ $task->priority }}"
                         data-date="{{ $task->date }}">
-                        <div class="task-body w-100 d-flex flex-column flex-sm-row justify-content-between align-items-center">
+                        <div
+                            class="task-body w-100 d-flex flex-column flex-sm-row justify-content-between align-items-center">
                             <div class="task-right__box d-flex align-items-center">
                                 <div class="form-check complete-task">
-                                    <input type="checkbox" class="form-check-input" {{ $task->completed ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-check-input"
+                                        {{ $task->completed ? 'checked' : '' }}>
                                 </div>
                                 <h6 class="task-title">{{ $task->title }}</h6>
                             </div>
                             <div class="task-center__box">
-                                <p class="task-text">{{ \Illuminate\Support\Str::words($task->description ?? '', 4, '...') }}
+                                <p class="task-text">
+                                    {{ \Illuminate\Support\Str::words($task->description ?? '', 4, '...') }}
                                 </p>
                             </div>
                             <div class="task-end__box gap-2 d-flex align-items-center">
@@ -171,7 +174,7 @@
         <div class="left-box col-12 col-lg-4">
             <div
                 class="col-12 gap-sm-3 sidebar-column d-flex flex-lg-column flex-column flex-sm-row justify-content-between align-items-center mt-4">
-                <section dir="rtl" style="width: 100%; ">
+                <section dir="rtl" style="width: 100%;">
                     <div class="card sidebar-card1 rounded-4 text-white"
                         style="width:100%;background:rgba(36, 31, 55, 0.38)">
                         <div class="card-body">
@@ -181,8 +184,10 @@
                                     <i class="ri-edit-2-fill"></i>
                                 </button>
                             </div>
-                            <p id="noteText" class="card-text" contenteditable="false" style="color: #ccc;">تایپ کنید...
-                            </p>
+                            {{-- متن از دیتابیس لود میشه --}}
+                            <p id="noteText" class="card-text" contenteditable="false" style="color: #ccc;"></p>
+
+                            {{-- این دکمه بعد از ادیت فعال میشه --}}
                             <button id="saveBtn" class="btn btn-success mt-2" style="display:none;">ذخیره</button>
                         </div>
                         <div class="card-footer border-0 d-flex justify-content-between align-items-center"
@@ -200,6 +205,7 @@
                         </div>
                     </div>
                 </section>
+
                 <section dir="rtl" style="width: 100%;">
                     <div id="activityCard" class="card sidebar-card mt-3 rounded-4 text-white shadow-lg"
                         style="width:100%; background:rgba(36, 31, 55, 0.38)">
@@ -306,22 +312,24 @@
     @push('script')
         <script>
             window.APP_ROUTES = {
-                taskStore: '{{ route("task.store") }}',
+                taskStore: '{{ route('task.store') }}',
                 taskUpdate: (id) => `{{ url('task') }}/${id}`,
                 taskDestroy: (id) => `{{ url('task') }}/${id}`
             };
             window.CSRF_TOKEN = '{{ csrf_token() }}';
-            window.initialTasks = {!! json_encode($initialTasks->map(function ($task) {
-            return [
-                'id' => $task->id,
-                'title' => $task->title,
-                'description' => $task->description,
-                'date' => $task->date,
-                'startTime' => $task->start_time,
-                'priority' => $task->priority,
-                'completed' => $task->completed,
-            ];
-        })) !!};
+            window.initialTasks = {!! json_encode(
+                $initialTasks->map(function ($task) {
+                    return [
+                        'id' => $task->id,
+                        'title' => $task->title,
+                        'description' => $task->description,
+                        'date' => $task->date,
+                        'startTime' => $task->start_time,
+                        'priority' => $task->priority,
+                        'completed' => $task->completed,
+                    ];
+                }),
+            ) !!};
         </script>
         <script>
             const toggler = document.querySelector('.navbar-toggler');
@@ -329,11 +337,9 @@
 
             toggler.addEventListener('click', () => {
                 navbar.classList.toggle('active');
-                // اگه خواستی خود دکمه هم کلاس بگیره
                 toggler.classList.toggle('active');
             });
             window.CSRF_TOKEN = '{{ csrf_token() }}';
-
         </script>
         <script src="{{ asset('js/note.js') }}"></script>
         <script src="{{ asset('js/dashboard.js') }}"></script>

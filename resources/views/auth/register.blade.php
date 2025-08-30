@@ -68,7 +68,8 @@
 
                 <!-- لینک ورود -->
                 <div class="text-center mt-3">
-                    <a href="{{ route('login') }}" class="text-info">حساب کاربری دارید؟ وارد شوید</a>
+                    <span>حساب کاربری دارید؟ </span>
+                    <a href="{{ route('login') }}" class="text-info">وارد شوید</a>
                 </div>
             </form>
         </div>

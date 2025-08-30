@@ -47,3 +47,8 @@ body {
     background-color: rgba(39, 49, 48, 0.68);
     height: 95vh;
 }
+
+.modal-dark .form-control::placeholder {
+    color: rgba(169, 169, 169, 0.65);
+    font-size: 14px;
+}

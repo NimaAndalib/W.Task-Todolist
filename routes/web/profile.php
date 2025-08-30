@@ -3,10 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
-// 👤 روت‌های پروفایل کاربر - فقط برای کاربران لاگین‌شده
+// ================================================================
+// PROFILE: مدیریت پروفایل کاربر - فقط برای کاربران احراز هویت شده
+// ================================================================
 Route::middleware('auth')->group(function () {
-    // 📋 گرفتن اطلاعات کاربر
+    
+    // ========================
+    // VIEW: دریافت اطلاعات پروفایل کاربر
+    // ========================
     Route::get('/profile/data', [ProfileController::class, 'getData'])->name('profile.data');
-    // ✏️ آپدیت اطلاعات کاربر
+    
+    // ========================
+    // PROFILE: به‌روزرسانی اطلاعات پروفایل کاربر
+    // ========================
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });

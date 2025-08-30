@@ -90,7 +90,7 @@
         <div class="dashboard-actions col-12 mt-4">
             <div class="col-md-12">
                 <div class="row align-items-center d-flex justify-content-between">
-                    <div class="col-6">
+                    <div class="col-6 col-md-4">
                         <div class="custom-select-wrapper">
                             <div class="custom-select py-2 btn">
                                 <div class="selected-option text-white text-center" data-value="current">
@@ -107,7 +107,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 d-flex justify-content-end">
+                    <div class="col-md-4 d-none d-md-block">
+                        <section dir="rtl" style="width: 100%;">
+                            <div id="activityCard" class="card sidebar-card mt-3 rounded-4 text-white shadow-lg"
+                                style="width:100%; background:rgba(36, 31, 55, 0.38)">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span id="tasksCompletedText">0 تسک تکمیل شده</span>
+                                        <span id="tasksCompletedPercent">0%</span>
+                                    </div>
+                                    <div class="progress rounded-pill"
+                                        style="height: 12px; background-color: rgba(255,255,255,0.2);">
+                                        <div id="activityProgressBar"
+                                            class="progress-bar progress-bar-striped progress-bar-animated rounded-pill"
+                                            style="width: 0%; background: linear-gradient(90deg, #ff6a00, #ee0979);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-6 col-md-4 d-flex justify-content-end">
                         <button class="btn btn-create-task" data-bs-toggle="modal" data-bs-target="#taskModal">
                             ساخت تسک
                         </button>
@@ -132,7 +151,8 @@
                             <h6 class="task-title">{{ $task->title }}</h6>
                         </div>
                         <div class="task-center__box">
-                            <p class="task-text">{{ \Illuminate\Support\Str::words($task->description ?? '', 4, '...') }}</p>
+                            <p class="task-text">{{ \Illuminate\Support\Str::words($task->description ?? '', 4, '...') }}
+                            </p>
                         </div>
                         <div class="task-end__box gap-2 d-flex align-items-center">
                             <div class="task-icon">
@@ -205,7 +225,7 @@
             </div>
         </div>
     </div>
-    <!-- تمپلیت تسک --> 
+    <!-- تمپلیت تسک -->
     <div id="task-template" class="task-template d-none">
         <div class="task-card">
             <div class="task-body w-100 d-flex flex-column flex-sm-row justify-content-between align-items-center">
@@ -236,33 +256,37 @@
     @push('script')
         <script>
             window.APP_ROUTES = {
-                taskStore: '{{ route("task.store") }}',
+                taskStore: '{{ route('task.store') }}',
                 taskUpdate: (id) => `{{ url('task') }}/${id}`,
                 taskDestroy: (id) => `{{ url('task') }}/${id}`
             };
             window.CSRF_TOKEN = '{{ csrf_token() }}';
-            window.initialTasks = {!! json_encode($initialTasks->map(function ($task) {
-            return [
-                'id' => $task->id,
-                'title' => $task->title,
-                'description' => $task->description,
-                'date' => $task->date,
-                'startTime' => $task->start_time,
-                'priority' => $task->priority,
-                'completed' => $task->completed,
-            ];
-        })) !!};
-
+            window.initialTasks = {!! json_encode(
+                $initialTasks->map(function ($task) {
+                    return [
+                        'id' => $task->id,
+                        'title' => $task->title,
+                        'description' => $task->description,
+                        'date' => $task->date,
+                        'startTime' => $task->start_time,
+                        'priority' => $task->priority,
+                        'completed' => $task->completed,
+                    ];
+                }),
+            ) !!};
+        </script>
+        <script>
             const toggler = document.querySelector('.navbar-toggler');
             const navbar = document.getElementById('navbar');
 
             toggler.addEventListener('click', () => {
                 navbar.classList.toggle('active');
-                // اگه خواستی خود دکمه هم کلاس بگیره
                 toggler.classList.toggle('active');
             });
-
+            window.CSRF_TOKEN = '{{ csrf_token() }}';
         </script>
+        <script src="{{ asset('js/note.js') }}"></script>
+
         <script src="{{ asset('js/task.js') }}"></script>
     @endpush
 @endsection

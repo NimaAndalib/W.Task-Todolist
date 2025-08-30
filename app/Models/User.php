@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Task;
-use App\Models\Note;
+use App\Models\DailyNote; // 📌 این خط رو اصلاح کنید
 
+// ================================================================
+// MODEL: مدل کاربران سیستم
+// ================================================================
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     /**
-     * Attributes that are mass assignable.
+     * ATTRIBUTE: فیلدهای قابل مقداردهی انبوه
      *
      * @var array<int, string>
      */
@@ -24,7 +27,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Attributes that should be hidden for serialization.
+     * ATTRIBUTE: فیلدهای مخفی شده در سریالایز
      *
      * @var array<int, string>
      */
@@ -34,7 +37,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Attribute casting.
+     * METHOD: تبدیل نوع فیلدها
      *
      * @return array<string,string>
      */
@@ -46,17 +49,32 @@ class User extends Authenticatable
         ];
     }
 
-    // ======= روابط =======
+    // ================================================================
+    // RELATIONSHIP: روابط مدل User
+    // ================================================================
 
-    // رابطه یک به چند با تسک‌ها
+    /**
+     * RELATIONSHIP: رابطه یک به چند با مدل Task
+     */
     public function tasks()
     {
         return $this->hasMany(Task::class);
     }
 
-    // رابطه یک به یک با نوت پد
-    public function note()
+    /**
+     * RELATIONSHIP: رابطه یک به چند با مدل DailyNote
+     */
+    public function dailyNotes()
     {
-        return $this->hasOne(Note::class);
+        return $this->hasMany(DailyNote::class);
+    }
+
+    /**
+     * RELATIONSHIP: رابطه یک به یک با مدل DailyNote برای امروز
+     * (اختیاری - اگر نیاز به رابطه جداگانه دارید)
+     */
+    public function todayNote()
+    {
+        return $this->hasOne(DailyNote::class)->where('date', now()->toDateString());
     }
 }

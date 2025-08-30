@@ -6,17 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
+// ================================================================
+// CONTROLLER: مدیریت عملیات پروفایل کاربر
+// ================================================================
 class ProfileController extends Controller
 {
     /**
-     * به صورت ایجکسی یک فیلد را آپدیت می‌کند.
-     * ورودی از سمت JS می‌تواند یکی از کلیدهای nameField, emailField, passwordField
-     * یا به‌طور مستقیم name, email, password باشد.
+     * POST: به‌روزرسانی ایجکسی یک فیلد از پروفایل کاربر
+     * 
+     * INPUT: ورودی می‌تواند یکی از کلیدهای nameField, emailField, passwordField
+     * یا کلیدهای مستقیم name, email, password باشد
      */
     public function update(Request $request)
     {
-        $user = $request->user(); // معادل auth()->user()
-
+        // AUTH: دریافت کاربر لاگین‌شده
+        $user = $request->user();
+        
+        // ERROR: بررسی احراز هویت کاربر
         if (!$user) {
             return response()->json([
                 'success' => false,
@@ -24,19 +30,22 @@ class ProfileController extends Controller
             ], 401);
         }
 
-        // نگاشت شناسه‌های input در Blade به نام فیلدهای واقعی در دیتابیس
+        // ========================
+        // CONFIG: نگاشت کلیدهای ورودی به فیلدهای دیتابیس
+        // ========================
         $map = [
             'nameField'     => 'name',
-            'emailField'    => 'email',
+            'emailField'    => 'email', 
             'passwordField' => 'password',
-            // پشتیبانی از کلیدهای مستقیم هم برای انعطاف:
             'name'          => 'name',
             'email'         => 'email',
             'password'      => 'password',
         ];
 
-        // تشخیص اینکه کدام فیلد ارسال شده
+        // APP: تشخیص فیلد ارسال شده توسط کاربر
         $sentKeys = array_intersect(array_keys($map), array_keys($request->all()));
+        
+        // ERROR: بررسی ارسال فیلد الزامی
         if (empty($sentKeys)) {
             return response()->json([
                 'success' => false,
@@ -44,11 +53,13 @@ class ProfileController extends Controller
             ], 422);
         }
 
-        $key       = array_shift($sentKeys);   // مثلاً nameField
-        $attribute = $map[$key];               // مثلاً name
+        $key       = array_shift($sentKeys);
+        $attribute = $map[$key];
         $value     = $request->input($key);
 
-        // قوانین اعتبارسنجی بر اساس فیلد
+        // ========================
+        // VALIDATION: قوانین اعتبارسنجی برای هر فیلد
+        // ========================
         $rules = match ($attribute) {
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
@@ -56,28 +67,32 @@ class ProfileController extends Controller
             default    => ['required'],
         };
 
-        // اعتبارسنجی همان کلید ارسال‌شده
+        // VALIDATION: اعتبارسنجی داده‌های ورودی
         $validated = $request->validate([$key => $rules]);
 
-        // ذخیره‌سازی
+        // ========================
+        // APP: پردازش و ذخیره‌سازی داده‌ها
+        // ========================
         if ($attribute === 'password') {
+            // SECURITY: هش کردن پسورد قبل از ذخیره‌سازی
             $user->password = Hash::make($value);
         } else {
-            // اگر ایمیل عوض شد و مدل قابلیت تأیید ایمیل دارد، می‌توان تایید را ریست کرد
+            // APP: بررسی تغییر ایمیل و ریست کردن تأییدیه در صورت نیاز
             if ($attribute === 'email' && method_exists($user, 'hasVerifiedEmail')) {
                 if ($user->email !== $value && $user->hasVerifiedEmail()) {
-                    $user->email_verified_at = null; // اختیاری: ریست کردن تایید ایمیل
+                    $user->email_verified_at = null;
                 }
             }
             $user->{$attribute} = $value;
         }
 
+        // DB: ذخیره‌سازی تغییرات در دیتابیس
         $user->save();
 
+        // RESPONSE: ارسال پاسخ موفقیت‌آمیز
         return response()->json([
             'success'      => true,
             'field'        => $attribute,
-            // برای پسورد مقدار واقعی برگردانده نمی‌شود
             'displayValue' => $attribute === 'password' ? '******' : $user->{$attribute},
             'message'      => 'اطلاعات با موفقیت ذخیره شد.',
         ]);
